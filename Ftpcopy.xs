@@ -33,7 +33,7 @@ ftpparse(buffer)
         }
         else
         {
-          /* return; */
+          XSRETURN_EMPTY;
         }
     OUTPUT:
         RETVAL
