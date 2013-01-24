@@ -31,9 +31,11 @@ ftpparse(buffer)
           hv_store(result, "flagtrycwd",     10, newSViv(fp.flagtrycwd), 0);
           hv_store(result, "flagtryretr",    11, newSViv(fp.flagtryretr), 0);
           hv_store(result, "sizetype",        8, newSViv(fp.sizetype), 0);
-          hv_store(result, "size",            4, newSViv(fp.size), 0);
+          /* FIXME size is 64 bit */
+          hv_store(result, "size",            4, newSVuv(fp.size), 0);
           hv_store(result, "mtimetype",       9, newSViv(fp.mtimetype), 0);
-          /* TODO: tai mtime */
+          /* FIXME mtime is 64 bit */
+          hv_store(result, "mtime",           5, newSVuv(fp.mtime.x), 0);
           hv_store(result, "idtype",          6, newSViv(fp.idtype), 0);
           hv_store(result, "id",              2, newSVpv(fp.id, fp.idlen), 0);
           hv_store(result, "format",          6, newSViv(fp.format), 0);
