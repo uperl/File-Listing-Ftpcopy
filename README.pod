@@ -1,0 +1,40 @@
+=pod
+
+=head1 NAME
+
+File::Listing::Ftpcopy - parse directory listing using ftpparse from ftpcopy
+
+=head1 VERSION
+
+version 0.01
+
+=head1 SEE ALSO
+
+=over 4
+
+=item *
+
+L<File::Listing>
+
+=item *
+
+L<http://ohse.de/uwe/ftpcopy/install.html>
+
+=item *
+
+L<http://cr.yp.to/ftpparse.html>
+
+=back
+
+=head1 AUTHOR
+
+Graham Ollis <plicease@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2013 by Graham Ollis.
+
+This is free software, licensed under:
+
+  The GNU General Public License, Version 2, June 1991
+
