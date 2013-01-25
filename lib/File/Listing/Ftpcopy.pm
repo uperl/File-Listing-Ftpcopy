@@ -9,6 +9,111 @@ use Carp qw( croak );
 # ABSTRACT: parse directory listing using ftpparse from ftpcopy
 # VERSION
 
+=head1 METHODS
+
+=head2 ftpparse( $line )
+
+Parse a single line from an FTP listing.  Returns a hash ref of
+information about the file found in that line, or undef if no
+file information was found about the file.
+
+Here is the information found in the hash ref:
+
+=over 4
+
+=item *
+
+name
+
+The name of the file
+
+=item *
+
+size
+
+The size of the file
+
+=item *
+
+sizetype
+
+What format the size refers to, one of
+
+=over 4
+
+=item *
+
+SIZE_UNKNOWN
+
+The size could not be determined (size is set to 0)
+
+=item *
+
+SIZE_BINARY
+
+The size assumes a binary transfer (TYPE I)
+
+=item *
+
+SIZE_ASCII
+
+The size assumes an ASCII transfer (TYPE A)
+
+This is currently unused, but could theoretically be used in the future.
+
+=back
+
+=item *
+
+flagtrycwd
+
+0 if the file is defintely not a directory.  1 otherwise.
+
+=item *
+
+flagtryretr
+
+0 if the file is defintely not a regular file or symlink, which can be retrieved.  1 otherwise.
+
+=item *
+
+symlink
+
+If the file is a symlink, then this contains the target name (or at least part of the target name)
+of the symlink.
+
+=item *
+
+format
+
+The detected format of the listing, one of:
+
+=over 4
+
+=item *
+
+FORMAT_UNKNOWN
+
+=item *
+
+FORMAT_EPLF
+
+=item *
+
+FORMAT_MLSX
+
+=item *
+
+FORMAT_LS
+
+=back
+
+=back
+
+=cut
+
+# FIXME: document/test mtime and mtimetype
+
 our %EXPORT_TAGS = (all => [qw(
   ftpparse
   FORMAT_EPLF
