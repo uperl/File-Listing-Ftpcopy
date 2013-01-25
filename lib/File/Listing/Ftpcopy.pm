@@ -59,6 +59,20 @@ code reference is passed, then this routine will be called and the
 return value from it will be incorporated in the listing.  The
 default is 'ignore'.
 
+For each file found in the listing it returns an array ref
+
+ ($name, $type, $size, $mtime, $mode) = @$file;
+ 
+The first element ($name) is the name of the file.
+
+The second element ($size) is the size of the file.
+
+The third element ($mtime) is the modification time of the file.
+
+The forth element ($mode) is supposed to be the permission bits
+of the file, but T<ftpparse> ignores the permission information
+so this is always undef.
+
 =cut
 
 sub parse_dir ($;$$$)
@@ -304,6 +318,12 @@ sub AUTOLOAD
 }
 
 1;
+
+=head1 CAVEATS
+
+Because ftpparse does not parse out permission information, the mode
+
+=cut
 
 # http://perldoc.perl.org/perlxstut.html
 # http://perldoc.perl.org/perlguts.html
