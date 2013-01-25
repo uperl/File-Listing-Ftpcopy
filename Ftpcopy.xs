@@ -146,6 +146,7 @@ _parse_dir(line)
           }
           av_push(result, mtime);
           av_push(result, newSV(0));
+          av_push(result, newSViv(fp.mtimetype));
           RETVAL = newRV((SV*)result);
         }
         else

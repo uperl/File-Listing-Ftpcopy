@@ -44,14 +44,14 @@ drop in replacement for the C<parse_dir> function from L<File::Listing>
 (although see CAVEATS below) that uses the C<ftpparse> function from C<ftpcopy>
 (see URL in the SEE ALSO section below) instead of the Perl implementation
 provided by L<File::Listing>.  C<ftpparse> is written in C, and so may or may
-not be faster, although probably unnoticable unless you are parsing a recursive
+not be faster, although probably unnoticeable unless you are parsing a recursive
 directory listing of a large system, and if you have to do that maybe you should
 rethink your approach anyway.
 
 Where this module may come in handy over L<File::Listing> is that it understands
 the output from a different subset of systems.  For my purposes, C<ftpparse>
 understands C<VMS> listings, on the other hand, L<File::Listing> understands
-apache listings, neither module understands both.  If you know ahead of time
+Apache listings, neither module understands both.  If you know ahead of time
 which system you are going to be dealing with you can use either this module
 or L<File::Listing>, or if you do not know ahead of time, you can try each 
 and use the results from which ever one actually works (or works best).
@@ -100,7 +100,7 @@ The second argument ($time_zone) is used when parsing the time
 stamps in the listing.  If the value is undefined, then the local
 time zone is assumed.
 
-The third argument ($type) is ignored, but included herre for compatability
+The third argument ($type) is ignored, but included here for compatibility
 with L<File::Listing>.
 
 The fourth argument ($error) specifies how unparseable lines should
@@ -187,13 +187,13 @@ This is currently unused, but could theoretically be used in the future.
 
 flagtrycwd
 
-0 if the file is defintely not a directory.  1 otherwise.
+0 if the file is definitely not a directory.  1 otherwise.
 
 =item *
 
 flagtryretr
 
-0 if the file is defintely not a regular file or symlink, which can be retrieved.  1 otherwise.
+0 if the file is definitely not a regular file or symlink, which can be retrieved.  1 otherwise.
 
 =item *
 
@@ -297,7 +297,7 @@ interface instead.
 The C<ftpparse> function from C<ftpcopy> is based on C<ftpparse> by Daniel J. Bernsteins.
 Bernsteins' version is incompatible with GPL, and possibly other open source licenses.
 The C<ftpparse> function from C<ftpcopy> was written by Uwe Ohse and is mostly public
-domain, but there was one dependant C source file which was licensed under GPL 2, so I
+domain, but there was one dependent C source file which was licensed under GPL 2, so I
 am licensing this whole distribution under GPL 2.
 
 =head1 SEE ALSO
