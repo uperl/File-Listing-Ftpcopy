@@ -6,6 +6,9 @@ use v5.10.1;
 use base qw( Exporter );
 use Carp qw( croak );
 
+# ABSTRACT: parse directory listing using ftpparse from ftpcopy
+# VERSION
+
 our %EXPORT_TAGS = (all => [qw(
   ftpparse
   FORMAT_EPLF
@@ -25,9 +28,6 @@ our %EXPORT_TAGS = (all => [qw(
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{all} } );
-
-# ABSTRACT: parse directory listing using ftpparse from ftpcopy
-# VERSION
 
 require XSLoader;
 XSLoader::load('File::Listing::Ftpcopy', $VERSION);
