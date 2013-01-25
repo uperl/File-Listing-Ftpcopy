@@ -1,1 +1,9 @@
---- {}
+---
+pod_spelling_system:
+  stopwords:
+    - ftpparse
+    - ftpcopy
+
+pod_coverage:
+  private:
+    - File::Listing::Ftpcopy*#constant
