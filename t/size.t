@@ -3,4 +3,4 @@ use warnings;
 use Test::More tests => 1;
 use File::Listing::Ftpcopy ();
 
-is File::Listing::Ftpcopy::_return42(), 42, 'return42 returns 42';
+pass("_size_of_UV = " . File::Listing::Ftpcopy::_size_of_UV());
