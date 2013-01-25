@@ -1,6 +1,6 @@
 use strict;
 use warnings;
 use Test::More tests => 1;
-use File::Listing::Ftpcopy;
+use File::Listing::Ftpcopy qw( ftpparse );
 
-is File::Listing::Ftpcopy::ftpparse(''), undef, 'not found';
+is ftpparse(''), undef, 'not found';

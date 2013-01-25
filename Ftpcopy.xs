@@ -85,3 +85,39 @@ _size_of_UV()
     OUTPUT:
         RETVAL
 
+int
+constant(name)
+        char *name
+    CODE:
+        if(!strcmp(name, "FORMAT_EPLF"))
+          RETVAL = FTPPARSE_FORMAT_EPLF;
+        else if(!strcmp(name, "FORMAT_LS"))
+          RETVAL = FTPPARSE_FORMAT_LS;
+        else if(!strcmp(name, "FORMAT_MLSX"))
+          RETVAL = FTPPARSE_FORMAT_MLSX;
+        else if(!strcmp(name, "FORMAT_UNKNOWN"))
+          RETVAL = FTPPARSE_FORMAT_UNKNOWN;
+        else if(!strcmp(name, "ID_FULL"))
+          RETVAL = FTPPARSE_ID_FULL;
+        else if(!strcmp(name, "ID_UNKNOWN"))
+          RETVAL = FTPPARSE_ID_UNKNOWN;
+        else if(!strcmp(name, "MTIME_LOCAL"))
+          RETVAL = FTPPARSE_MTIME_LOCAL;
+        else if(!strcmp(name, "MTIME_REMOTEDAY"))
+          RETVAL = FTPPARSE_MTIME_REMOTEDAY;
+        else if(!strcmp(name, "MTIME_REMOTEMINUTE"))
+          RETVAL = FTPPARSE_MTIME_REMOTEMINUTE;
+        else if(!strcmp(name, "MTIME_REMOTESECOND"))
+          RETVAL = FTPPARSE_MTIME_REMOTESECOND;
+        else if(!strcmp(name, "MTIME_UNKNOWN"))
+          RETVAL = FTPPARSE_MTIME_UNKNOWN;
+        else if(!strcmp(name, "SIZE_ASCII"))
+          RETVAL = FTPPARSE_SIZE_ASCII;
+        else if(!strcmp(name, "SIZE_BINARY"))
+          RETVAL = FTPPARSE_SIZE_BINARY;
+        else if(!strcmp(name, "SIZE_UNKNOWN"))
+          RETVAL = FTPPARSE_SIZE_UNKNOWN;
+        else
+          RETVAL = -1;
+    OUTPUT:
+        RETVAL
