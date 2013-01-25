@@ -122,6 +122,52 @@ FORMAT_LS
 
 =back
 
+=item *
+
+mtime
+
+The modification time in TAI format.
+
+=item *
+
+mtimetype
+
+Information about the mtime field, one of:
+
+=over 4
+
+=item *
+
+MTIME_UNKNOWN 
+
+modification time is undetermined
+
+=item *
+
+MTIME_LOCAL
+
+time is correct for the current time zone
+
+=item *
+
+MTIME_REMOTEMINUTE
+
+Time zone and seconds are unknown
+
+=item *
+
+MTIME_REMOTEDAY
+
+Time zone and time of day are unknown
+
+=item *
+
+MTIME_REMOTESECOND
+
+time zone is unknown
+
+=back
+
 =back
 
 =head1 SEE ALSO

@@ -121,3 +121,23 @@ constant(name)
           RETVAL = -1;
     OUTPUT:
         RETVAL
+
+
+SV *
+_tai_now()
+    INIT:
+        SV *result;
+        struct tai to;
+        char b[21];
+    CODE:
+        tai_now(&to);
+#ifdef PRIu64
+        sprintf(b, "%"PRIu64,to.x);
+#else
+        sprintf(b, "%llu",to.x);
+#endif
+        result = (SV*)sv_2mortal((SV*)newSVpv(b,0));
+        RETVAL = newRV((SV*)result);
+    OUTPUT:
+        RETVAL
+
