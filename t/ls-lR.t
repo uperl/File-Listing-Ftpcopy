@@ -75,13 +75,14 @@ ok($size, 8817);
 # which year if this script lives for a long time.
 $timestring = scalar(localtime($mtime));
 ok($timestring =~ /Mar\s+15\s+18:05/);
+print "# $timestring =~ /Mar\s+15\s+18:05/\n";
 
 # File::Listing::Ftpparse does not support file mode
 #ok($mode, 0100644);
 
-
+# Apr  8  1994
 @dir = parse_dir(<<'EOT');
-drwxr-xr-x 21 root root 704 2007-03-22 21:48 dir
+drwxr-xr-x 21 root root 704 Mar 22  2007 dir
 EOT
 
 ok(@dir, 1);
@@ -89,5 +90,5 @@ ok($dir[0][0], "dir");
 ok($dir[0][1], "d");
 
 $timestring = scalar(localtime($dir[0][3]));
-print "# $timestring\n";
-ok($timestring =~ /^Thu Mar 22 21:48/);
+print "# $timestring =~ /^Thu Mar 22/\n";
+ok($timestring =~ /^Thu Mar 22/);
