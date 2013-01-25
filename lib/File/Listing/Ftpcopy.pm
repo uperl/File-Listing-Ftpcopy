@@ -19,11 +19,9 @@ use Carp qw( croak );
  {
    chomp $line;
    my $h = ftpparse($line);
-   if(defined $h)
-   {
-     say "name : $h{name}";
-     say "size : $h{size}" if $h{sizetype} != SIZE_UNKNOWN;
-   }
+   next unless defined $h;
+   say "name : $h{name}";
+   say "size : $h{size}" if $h{sizetype} != SIZE_UNKNOWN;
  }
 
 =head1 METHODS
