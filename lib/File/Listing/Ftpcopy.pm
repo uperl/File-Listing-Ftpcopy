@@ -127,7 +127,8 @@ FORMAT_LS
 
 mtime
 
-The modification time in TAI format.
+The modification time as the number of non-leap seconds since
+the epoch.
 
 =item *
 

@@ -43,13 +43,23 @@ ftpparse(buffer)
           hv_store(result, "size",            4, newSVpv(b,0), 0);
 #endif
           hv_store(result, "mtimetype",       9, newSViv(fp.mtimetype), 0);
+          /*
+           * okay this is slightly silly, the TAI implementation
+           * with ftpparse is converting from UNIX time to TAI but
+           * it isn't consulting any leap second tables or anything
+           * like that so it is sort of pointless.  Since most Perl
+           * programmers are likely to be dealing with the UNIX time
+           * scale we will just quietly convert it back to UNIX time
+           * (at least in so far as it was converted to TAI in the
+           * first place).
+           */
 #if IS_64BIT_UV
-          hv_store(result, "mtime",           5, newSVuv(fp.mtime.x), 0);
+          hv_store(result, "mtime",           5, newSVuv(fp.mtime.x-4611686018427387914ULL), 0);
 #else
 #ifdef PRIu64
-          sprintf(b, "%"PRIu64,fp.mtime.x);
+          sprintf(b, "%"PRIu64,fp.mtime.x-4611686018427387914ULL);
 #else
-          sprintf(b, "%llu",fp.mtime.x);
+          sprintf(b, "%llu",fp.mtime.x-4611686018427387914ULL);
 #endif
           hv_store(result, "mtime",           5, newSVpv(b,0), 0);
 #endif
