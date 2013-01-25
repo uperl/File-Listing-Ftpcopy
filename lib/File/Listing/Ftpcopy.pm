@@ -138,9 +138,9 @@ C<undef>.
 sub parse_dir ($;$$$)
 {
   my($listing, $time_zone, $type, $error) = @_;
-
-  # FIXME implement $error
   
+  $error = sub { warn shift } if $error eq 'warn';
+
   my $next;
   if(ref($listing) eq 'ARRAY')
   {
@@ -205,6 +205,10 @@ sub parse_dir ($;$$$)
         }
       }
       push @answer, $h;
+    }
+    elsif(defined $error)
+    {
+      $error->($line)
     }
     $line = $next->();
   }
