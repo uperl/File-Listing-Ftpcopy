@@ -70,22 +70,26 @@ sub parse_dir ($;$$$)
   my $next;
   if(ref($listing) eq 'ARRAY')
   {
-    # a reference to an array of directory lines
-    die 'FIXME';
+    my @lines = @$listing;
+    $next = sub { shift @lines };
   }
   elsif(ref($listing) eq 'GLOB')
   {
-    # glob representing a filehandle to read
-    die 'FIXME';
+    $next = sub {
+      my $line = <$listing>;
+      $line;
+    };
   }
-  elsif(ref($listing)
+  elsif(ref $listing)
   {
     croak "Illegal argument to parse_dir()";
   }
-  elsif($listing =~ /^\*\w+(::\w+)+$/) {
+  elsif($listing =~ /^\*\w+(::\w+)+$/)
   {
-    # This scalar looks like a file handle, so we assume it is
-    die 'FIXME';
+    $next = sub {
+      my $line = <$listing>;
+      $line;
+    };
   }
   else
   {
