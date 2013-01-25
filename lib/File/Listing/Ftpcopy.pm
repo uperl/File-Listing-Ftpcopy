@@ -98,6 +98,7 @@ sub parse_dir ($;$$$)
   my $line = $next->();
   while(defined $line)
   {
+    chomp $line;
     my $h = _parse_dir($line);
     if(defined $h)
     {
