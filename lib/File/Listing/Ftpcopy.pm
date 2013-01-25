@@ -387,6 +387,14 @@ C<ftpparse> uses a different algorithm, and uses a different interface under the
 it recognizes a different subset of system listings, and may interpret them differently
 so this module is not, and does not pretend to be 100% compatible with L<File::Listing>.
 
+Internally C<ftpparse> assumes GMT if it can't determine the time zone from the listing,
+and doesn't provide an interface for specifying another time zone if you do happen to
+know what the remote server's time zone is.  L<File::Listing> assumes the listing is
+for the local time zone unless you specify one through the calling interface.  In order
+to get the expected behavior for C<parse_dir>, this module jumps through some extra
+hoops to support the L<File::Listing> interface.  To avoid this hoops use the C<ftpparse>
+interface instead.
+
 The C<ftpparse> function from C<ftpcopy> is based on C<ftpparse> by Daniel J. Bernsteins.
 Bernsteins' version is incompatible with GPL, and possibly other open source licenses.
 The C<ftpparse> function from C<ftpcopy> was written by Uwe Ohse and is mostly public
