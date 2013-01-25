@@ -109,27 +109,41 @@ _parse_dir(line)
           else
             type = "?";
           av_push(result, newSVpv(type, 1));
+          if(fp.sizetype == FTPPARSE_SIZE_UNKNOWN)
+          {
+            size = newSV(0);
+          }
+          else
+          {
 #if IS_64BIT_UV
-          size = newSVuv(fp.size);
+            size = newSVuv(fp.size);
 #else
 #ifdef PRIu64
-          sprintf(b, "%"PRIu64,fp.size);
+            sprintf(b, "%"PRIu64,fp.size);
 #else
-          sprintf(b, "%llu",fp.size);
+            sprintf(b, "%llu",fp.size);
 #endif
-          size = newSVpv(b,0);
+            size = newSVpv(b,0);
 #endif
+          }
           av_push(result, size);
+          if(fp.mtimetype == FTPPARSE_MTIME_UNKNOWN)
+          {
+            mtime = newSV(0);
+          }
+          else
+          {
 #if IS_64BIT_UV
-          mtime = newSVuv(fp.mtime.x-4611686018427387914ULL);
+            mtime = newSVuv(fp.mtime.x-4611686018427387914ULL);
 #else
 #ifdef PRIu64
-          sprintf(b, "%"PRIu64,fp.mtime.x-4611686018427387914ULL);
+            sprintf(b, "%"PRIu64,fp.mtime.x-4611686018427387914ULL);
 #else
-          sprintf(b, "%llu",fp.mtime.x-4611686018427387914ULL);
+            sprintf(b, "%llu",fp.mtime.x-4611686018427387914ULL);
 #endif
-          mtime = newSVpv(b,0);
+            mtime = newSVpv(b,0);
 #endif
+          }
           av_push(result, mtime);
           av_push(result, newSV(0));
           RETVAL = newRV((SV*)result);
