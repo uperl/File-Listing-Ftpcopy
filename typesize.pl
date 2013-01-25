@@ -47,6 +47,8 @@ foreach my $type (@types)
   say sprintf("%02d %s", $size, $type);
 }
 
+say $header "#define IS_64BIT_UV " . ($Config{uvsize} >= 8 ? 1 : 0);
+
 close $header;
 
 sub run

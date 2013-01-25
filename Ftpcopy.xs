@@ -24,17 +24,33 @@ ftpparse(buffer)
           hv_store(result, "flagtrycwd",     10, newSViv(fp.flagtrycwd), 0);
           hv_store(result, "flagtryretr",    11, newSViv(fp.flagtryretr), 0);
           hv_store(result, "sizetype",        8, newSViv(fp.sizetype), 0);
-          /* FIXME test this on 32 bit */
-          if(sizeof(UV) >= 8)
-            hv_store(result, "size",          4, newSVuv(fp.size), 0);
-          else
-            hv_store(result, "size",          4, newSVpv(sprintf(b, "%"PRIu64,fp.size),0), 0);
+          /*
+           * If UV is 64 bit then store size as a UV,
+           * otherwise use sprintf and store it as a string.
+           * use PRIu64 which is c99, otherwise try %llu
+           * and cross fingers that it is supported.
+           */
+#if IS_64BIT_UV
+          hv_store(result, "size",            4, newSVuv(fp.size), 0);
+#else
+#ifdef PRIu64
+          sprintf(b, "%"PRIu64,fp.size);
+#else
+          sprintf(b, "%llu",fp.size);
+#endif
+          hv_store(result, "size",            4, newSVpv(b,0), 0);
+#endif
           hv_store(result, "mtimetype",       9, newSViv(fp.mtimetype), 0);
-          /* FIXME test this on 32 bit */
-          if(sizeof(UV) >= 8)
-            hv_store(result, "mtime",         5, newSVuv(fp.mtime.x), 0);
-          else
-            hv_store(result, "mtime",         5, newSVpv(sprintf(b, "%"PRIu64,fp.mtime.x),0), 0);
+#if IS_64BIT_UV
+          hv_store(result, "mtime",           5, newSVuv(fp.mtime.x), 0);
+#else
+#ifdef PRIu64
+          sprintf(b, "%"PRIu64,fp.mtime.x);
+#else
+          sprintf(b, "%llu",fp.mtime.x);
+#endif
+          hv_store(result, "mtime",           5, newSVpv(b,0), 0);
+#endif
           hv_store(result, "idtype",          6, newSViv(fp.idtype), 0);
           hv_store(result, "id",              2, newSVpv(fp.id, fp.idlen), 0);
           hv_store(result, "format",          6, newSViv(fp.format), 0);
