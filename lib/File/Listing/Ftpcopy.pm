@@ -9,6 +9,23 @@ use Carp qw( croak );
 # ABSTRACT: parse directory listing using ftpparse from ftpcopy
 # VERSION
 
+=head1 SYNOPSIS
+
+ # ftpparse interface
+ use v5.10;
+ use Parse::Listing::Ftpcopy qw( :all );
+ 
+ foreach my $line (`ls -l`)
+ {
+   chomp $line;
+   my $h = ftpparse($line);
+   if(defined $h)
+   {
+     say "name : $h{name}";
+     say "size : $h{size}" if $h{sizetype} != SIZE_UNKNOWN;
+   }
+ }
+
 =head1 METHODS
 
 =head2 ftpparse( $line )
