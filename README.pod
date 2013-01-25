@@ -10,6 +10,19 @@ version 0.01
 
 =head1 SYNOPSIS
 
+ # traditional interface
+ use File::Listing::Ftpcopy qw(parse_dir);
+ $ENV{LANG} = "C";  # dates in non-English locales not supported
+ for (parse_dir(`ls -l`)) {
+     ($name, $type, $size, $mtime, $mode) = @$_;
+     next if $type ne 'f'; # plain file
+     #...
+ }
+
+ # directory listing can also be read from a file
+ open(LISTING, "zcat ls-lR.gz|");
+ $dir = parse_dir(\*LISTING, '+0000');
+
  # ftpparse interface
  use v5.10;
  use Parse::Listing::Ftpcopy qw( :all );
@@ -24,6 +37,26 @@ version 0.01
  }
 
 =head1 METHODS
+
+=head2 parse_dir( $listing, [ $time_zone, [ $type, [ $error ] ] ] )
+
+The first argument ($listing) is the directory listing to parse.
+It can be a scalar, a reference to an array of directory lines or a
+glob representing a filehandle to read the directory listing from.
+
+The second argument ($time_zone) is used when parsing the time
+stamps in the listing.  If the value is undefined, then the local
+time zone is assumed.
+
+The third argument ($type) is ignored, but included herre for compatability
+with L<File::Listing>.
+
+The fourth argument ($error) specifies how unparseable lines should
+be treated.  Values can be 'ignore', 'warn' or a code reference.
+'warn' means that the perl T<warn> function will be called.  If a 
+code reference is passed, then this routine will be called and the
+return value from it will be incorporated in the listing.  The
+default is 'ignore'.
 
 =head2 ftpparse( $line )
 

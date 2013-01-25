@@ -8,8 +8,8 @@
 MODULE = File::Listing::Ftpcopy		PACKAGE = File::Listing::Ftpcopy
 
 SV *
-ftpparse(buffer)
-        char *buffer;
+ftpparse(line)
+        char *line;
     INIT:
         HV * result;
         struct ftpparse fp;
@@ -18,7 +18,7 @@ ftpparse(buffer)
         char b[21];
 #endif
     CODE:
-        val = ftpparse(&fp, buffer, strlen(buffer), 0);
+        val = ftpparse(&fp, line, strlen(line), 0);
         if(val)
         {
           result = (HV*)sv_2mortal((SV*)newHV());
@@ -80,6 +80,67 @@ ftpparse(buffer)
     OUTPUT:
         RETVAL
        
+
+SV *
+_parse_dir(line)
+        char * line
+    INIT:
+        struct ftpparse fp;
+        int val;
+        AV * result;
+        char *type;
+        SV * size;
+        SV * mtime;
+#if ! IS_64BIT_UV
+        char b[21];
+#endif
+    CODE:
+        val = ftpparse(&fp, line, strlen(line), 0);
+        if(val && !(fp.namelen == 1 && fp.name[0] == '.') && !(fp.namelen == 2 && fp.name[0] == '.' && fp.name[1] == '.'))
+        {
+          result = (AV*)sv_2mortal((SV*)newAV());
+          av_push(result, newSVpv(fp.name,fp.namelen));
+          if(fp.symlink != NULL)
+            type = "l";
+          else if(fp.flagtrycwd && !fp.flagtryretr)
+            type = "d";
+          else if(!fp.flagtrycwd && fp.flagtryretr)
+            type = "f";
+          else
+            type = "?";
+          av_push(result, newSVpv(type, 1));
+#if IS_64BIT_UV
+          size = newSVuv(fp.size);
+#else
+#ifdef PRIu64
+          sprintf(b, "%"PRIu64,fp.size);
+#else
+          sprintf(b, "%llu",fp.size);
+#endif
+          size = newSVpv(b,0);
+#endif
+          av_push(result, size);
+#if IS_64BIT_UV
+          mtime = newSVuv(fp.mtime.x-4611686018427387914ULL);
+#else
+#ifdef PRIu64
+          sprintf(b, "%"PRIu64,fp.mtime.x-4611686018427387914ULL);
+#else
+          sprintf(b, "%llu",fp.mtime.x-4611686018427387914ULL);
+#endif
+          mtime = newSVpv(b,0);
+#endif
+          av_push(result, mtime);
+          av_push(result, newSV(0));
+          RETVAL = newRV((SV*)result);
+        }
+        else
+        {
+          XSRETURN_EMPTY;
+        }
+    OUTPUT:
+        RETVAL
+        
 
 int
 _return42()

@@ -11,6 +11,19 @@ use Carp qw( croak );
 
 =head1 SYNOPSIS
 
+ # traditional interface
+ use File::Listing::Ftpcopy qw(parse_dir);
+ $ENV{LANG} = "C";  # dates in non-English locales not supported
+ for (parse_dir(`ls -l`)) {
+     ($name, $type, $size, $mtime, $mode) = @$_;
+     next if $type ne 'f'; # plain file
+     #...
+ }
+
+ # directory listing can also be read from a file
+ open(LISTING, "zcat ls-lR.gz|");
+ $dir = parse_dir(\*LISTING, '+0000');
+
  # ftpparse interface
  use v5.10;
  use Parse::Listing::Ftpcopy qw( :all );
@@ -25,6 +38,76 @@ use Carp qw( croak );
  }
 
 =head1 METHODS
+
+=head2 parse_dir( $listing, [ $time_zone, [ $type, [ $error ] ] ] )
+
+The first argument ($listing) is the directory listing to parse.
+It can be a scalar, a reference to an array of directory lines or a
+glob representing a filehandle to read the directory listing from.
+
+The second argument ($time_zone) is used when parsing the time
+stamps in the listing.  If the value is undefined, then the local
+time zone is assumed.
+
+The third argument ($type) is ignored, but included herre for compatability
+with L<File::Listing>.
+
+The fourth argument ($error) specifies how unparseable lines should
+be treated.  Values can be 'ignore', 'warn' or a code reference.
+'warn' means that the perl T<warn> function will be called.  If a 
+code reference is passed, then this routine will be called and the
+return value from it will be incorporated in the listing.  The
+default is 'ignore'.
+
+=cut
+
+sub parse_dir ($;$$$)
+{
+  my($listing, $time_zone, $type, $error) = @_;
+
+  # FIXME implement $error
+  
+  my $next;
+  if(ref($listing) eq 'ARRAY')
+  {
+    # a reference to an array of directory lines
+    die 'FIXME';
+  }
+  elsif(ref($listing) eq 'GLOB')
+  {
+    # glob representing a filehandle to read
+    die 'FIXME';
+  }
+  elsif(ref($listing)
+  {
+    croak "Illegal argument to parse_dir()";
+  }
+  elsif($listing =~ /^\*\w+(::\w+)+$/) {
+  {
+    # This scalar looks like a file handle, so we assume it is
+    die 'FIXME';
+  }
+  else
+  {
+    my @lines = split /\015?\012/, $listing;
+    $next = sub { shift @lines };
+  }
+  
+  my @answer;
+  
+  my $line = $next->();
+  while(defined $line)
+  {
+    my $h = _parse_dir($line);
+    if(defined $h)
+    {
+      push @answer, $h;
+    }
+    $line = $next->();
+  }
+  
+  return wantarray ? @answer : \@answer;
+}
 
 =head2 ftpparse( $line )
 
@@ -174,7 +257,10 @@ time zone is unknown
 
 =cut
 
+our @EXPORT = qw( parse_dir );
+
 our %EXPORT_TAGS = (all => [qw(
+  parse_dir
   ftpparse
   FORMAT_EPLF
   FORMAT_LS
