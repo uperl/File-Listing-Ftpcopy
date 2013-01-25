@@ -14,7 +14,9 @@ ftpparse(buffer)
         HV * result;
         struct ftpparse fp;
         int val;
-        char b[48];
+#if ! IS_64BIT_UV
+        char b[21];
+#endif
     CODE:
         val = ftpparse(&fp, buffer, strlen(buffer), 0);
         if(val)
