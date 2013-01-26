@@ -139,7 +139,7 @@ sub parse_dir ($;$$$)
 {
   my($listing, $time_zone, $type, $error) = @_;
   
-  $error = sub { warn shift } if $error eq 'warn';
+  $error = sub { warn shift } if ($error//'') eq 'warn';
 
   my $next;
   if(ref($listing) eq 'ARRAY')
