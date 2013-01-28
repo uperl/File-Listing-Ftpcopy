@@ -52,7 +52,7 @@ rethink your approach anyway.
 
 Where this module may come in handy over L<File::Listing> is that it understands
 the output from a different subset of systems.  For my purposes, C<ftpparse>
-understands C<VMS> listings, on the other hand, L<File::Listing> understands
+understands VMS listings, on the other hand, L<File::Listing> understands
 Apache listings, neither module understands both.  If you know ahead of time
 which system you are going to be dealing with you can use either this module
 or L<File::Listing>, or if you do not know ahead of time, you can try each 
@@ -421,7 +421,7 @@ and doesn't provide an interface for specifying another time zone if you do happ
 know what the remote server's time zone is.  L<File::Listing> assumes the listing is
 for the local time zone unless you specify one through the calling interface.  In order
 to get the expected behavior for C<parse_dir>, this module jumps through some extra
-hoops to support the L<File::Listing> interface.  To avoid this hoops use the C<ftpparse>
+hoops to support the L<File::Listing> interface.  To avoid these hoops use the C<ftpparse>
 interface instead.
 
 The C<ftpparse> function from C<ftpcopy> is based on C<ftpparse> by Daniel J. Bernsteins.
