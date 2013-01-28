@@ -860,7 +860,7 @@ ftpparse_int(struct ftpparse *fp,char *buf,int len)
 {
   unsigned int count;
   char *p[MAXWORDS];
-  int l[MAXWORDS];
+  int l[MAXWORDS] = { 0,0,0,0,0,0,0,0,0,0 };
 
   SETUP();
 
