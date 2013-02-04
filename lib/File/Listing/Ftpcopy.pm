@@ -34,8 +34,8 @@ use Time::Local qw( timelocal );
    chomp $line;
    my $h = ftpparse($line);
    next unless defined $h;
-   say "name : $h{name}";
-   say "size : $h{size}" if $h{sizetype} != SIZE_UNKNOWN;
+   say "name : ", $h->{name}
+   say "size : ", $h->{size} if $h->{sizetype} != SIZE_UNKNOWN;
  }
 
 =head1 DESCRIPTION
