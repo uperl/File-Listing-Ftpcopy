@@ -6,7 +6,7 @@ File::Listing::Ftpcopy - parse directory listing using ftpparse from ftpcopy
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
