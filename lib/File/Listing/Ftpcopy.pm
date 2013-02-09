@@ -3,7 +3,7 @@ package File::Listing::Ftpcopy;
 use strict;
 use warnings;
 use v5.10.1;
-use base qw( Exporter );
+use parent qw( Exporter );
 use Carp qw( croak );
 use Time::Local qw( timelocal );
 
