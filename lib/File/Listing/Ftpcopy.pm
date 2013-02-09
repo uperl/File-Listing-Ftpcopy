@@ -3,7 +3,7 @@ package File::Listing::Ftpcopy;
 use strict;
 use warnings;
 use v5.10.1;
-use parent qw( Exporter );
+use Exporter;
 use Carp qw( croak );
 use Time::Local qw( timelocal );
 
@@ -364,6 +364,7 @@ time zone is unknown
 
 =cut
 
+our @ISA = qw( Exporter );
 our @EXPORT = qw( parse_dir );
 
 our %EXPORT_TAGS = (all => [qw(
