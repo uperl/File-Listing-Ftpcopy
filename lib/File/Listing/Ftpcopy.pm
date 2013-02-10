@@ -410,7 +410,7 @@ sub AUTOLOAD
 
 =head1 CAVEATS
 
-Because C<ftpparse> is written in C and the bindings to it are in XS a C compiler
+Because C<ftpparse> is written in C and the bindings to it are in XS, so a C compiler
 is required.
 
 Because C<ftpparse> does not parse out permission information, the mode field is
