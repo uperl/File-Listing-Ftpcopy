@@ -1,6 +1,6 @@
 language: perl
 install:
-  - cpanm -n POSIX Test::More
-script: HARNESS_IS_VERBOSE=1 prove -lvr t xt
+  - cpanm -n Dist::Zilla::PluginBundle::Plicease
+script: HARNESS_IS_VERBOSE=1 dzil run prove -lvr t xt
 perl:
   - "5.16"
