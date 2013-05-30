@@ -1,11 +1,12 @@
 # stolen unabashedly from Gisle Aas' File::Listing
-
+use strict;
+use warnings;
 use Test;
 plan tests => 9;
 
 use File::Listing::Ftpcopy;
 
-$dir = <<'EOL';
+my $dir = <<'EOL';
 total 68
 drwxr-xr-x   4 aas      users        1024 Mar 16 15:47 .
 drwxr-xr-x  11 aas      users        1024 Mar 15 19:22 ..
@@ -51,12 +52,12 @@ drwxr-xr-x   3 aas      users        1024 Mar 15 18:05 ..
 -rw-r--r--   1 aas      users          19 Mar 10 09:05 Root
 EOL
 
-@dir = parse_dir($dir, undef, 'unix');
+my @dir = parse_dir($dir, undef, 'unix');
 
 ok(@dir, 25);
 
 for (@dir) {
-   ($name, $type, $size, $mtime, $mode) = @$_;
+   my ($name, $type, $size, $mtime, $mode) = @$_;
    $size ||= 0;  # ensure that it is defined
    printf "# %-25s $type %6d  ", $name, $size;
    print scalar(localtime($mtime));
@@ -65,7 +66,7 @@ for (@dir) {
 }
 
 # Pick out the Socket.pm line as the sample we check carefully
-($name, $type, $size, $mtime, $mode) = @{$dir[9]};
+my ($name, $type, $size, $mtime, $mode) = @{$dir[9]};
 
 ok($name, "Socket.pm");
 ok($type, "f");
@@ -73,7 +74,7 @@ ok($size, 8817);
 
 # Must be careful when checking the time stamps because we don't know
 # which year if this script lives for a long time.
-$timestring = scalar(localtime($mtime));
+my $timestring = scalar(localtime($mtime));
 ok($timestring =~ /Mar\s+15\s+18:05/);
 print "# $timestring =~ /Mar\\s+15\\s+18:05/\n";
 

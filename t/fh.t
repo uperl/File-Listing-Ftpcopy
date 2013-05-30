@@ -1,10 +1,12 @@
 # stolen unabashedly from Gisle Aas' File::Listing
+use strict;
+use warnings;
 use Test;
 plan tests => 4;
 
 use File::Listing::Ftpcopy ('parse_dir');
 
-$list = parse_dir(*DATA, undef, 'dosftp');
+my $list = parse_dir(*DATA, undef, 'dosftp');
 
 ok @$list, 2;
 ok $list->[0][0], "src.slf";
