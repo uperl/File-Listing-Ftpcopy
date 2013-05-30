@@ -20,4 +20,4 @@ pod_spelling_system:
 
 pod_coverage:
   private:
-    - File::Listing::Ftpcopy
+    - File::Listing::Ftpcopy#constant
