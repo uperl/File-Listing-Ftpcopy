@@ -60,7 +60,7 @@ for (@dir) {
    $size ||= 0;  # ensure that it is defined
    printf "# %-25s $type %6d  ", $name, $size;
    print scalar(localtime($mtime));
-   printf "  %06o", $mode;
+   do { no warnings; printf "  %06o", $mode };
    print "\n";
 }
 
@@ -75,7 +75,7 @@ ok($size, 8817);
 # which year if this script lives for a long time.
 $timestring = scalar(localtime($mtime));
 ok($timestring =~ /Mar\s+15\s+18:05/);
-print "# $timestring =~ /Mar\s+15\s+18:05/\n";
+print "# $timestring =~ /Mar\\s+15\\s+18:05/\n";
 
 # File::Listing::Ftpparse does not support file mode
 #ok($mode, 0100644);

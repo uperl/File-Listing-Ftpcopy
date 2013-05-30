@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - rm dist build dep on Dist::Zilla::Plugin::MakeMaker::Custom
   - rm dep on base
 
 0.02      2013-02-04 11:28:59 America/New_York
