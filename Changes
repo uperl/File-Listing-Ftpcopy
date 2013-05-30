@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.02_02   2013-05-30 05:06:05 America/New_York
   - be more strict and warningful
 
 0.02_01   2013-05-29 21:02:05 America/New_York
