@@ -323,13 +323,18 @@ L<http://cr.yp.to/ftpparse.html>
 
 =head1 AUTHOR
 
-Graham Ollis <plicease@cpan.org>
+C code: Uwe Ohse
+
+XS and Perl code: Graham Ollis <plicease@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by Graham Ollis.
+Copyright 2002 by Uwe Ohse
 
-This is free software, licensed under:
+Copyright 2013 by Graham Ollis
 
-  The GNU General Public License, Version 2, June 1991
+This is free software, licensed under the GNU General Public License, 
+Version 2, June 1991
+
+Some source files marked as public domain are in the public domain.
 
