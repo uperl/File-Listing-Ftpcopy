@@ -477,4 +477,3 @@ Version 2, June 1991
 
 Some source files marked as public domain are in the public domain.
 
-=cut
