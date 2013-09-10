@@ -3,6 +3,7 @@ install:
   - cpanm -n Dist::Zilla::PluginBundle::Author::Plicease
 script: HARNESS_IS_VERBOSE=1 dzil run prove -lvr t xt
 perl:
+  - "5.19"
   - "5.18"
   - "5.16"
   - "5.14"
