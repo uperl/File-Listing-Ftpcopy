@@ -21,7 +21,7 @@ ftpparse(line)
         val = ftpparse(&fp, line, strlen(line), 0);
         if(val)
         {
-          result = (HV*)sv_2mortal((SV*)newHV());
+          result = newHV();
           hv_store(result, "name",            4, newSVpv(fp.name,fp.namelen), 0);
           hv_store(result, "flagtrycwd",     10, newSViv(fp.flagtrycwd), 0);
           hv_store(result, "flagtryretr",    11, newSViv(fp.flagtryretr), 0);
@@ -71,7 +71,7 @@ ftpparse(line)
           {
             hv_store(result, "symlink", 7, newSVpv(fp.symlink, fp.symlinklen), 0);
           }
-          RETVAL = newRV((SV*)result);
+          RETVAL = newRV_noinc((SV*)result);
         }
         else
         {
@@ -98,7 +98,7 @@ _parse_dir(line)
         val = ftpparse(&fp, line, strlen(line), 0);
         if(val && !(fp.namelen == 1 && fp.name[0] == '.') && !(fp.namelen == 2 && fp.name[0] == '.' && fp.name[1] == '.'))
         {
-          result = (AV*)sv_2mortal((SV*)newAV());
+          result = newAV();
           av_push(result, newSVpv(fp.name,fp.namelen));
           if(fp.symlink != NULL)
             type = "l";
@@ -147,7 +147,7 @@ _parse_dir(line)
           av_push(result, mtime);
           av_push(result, newSV(0));
           av_push(result, newSViv(fp.mtimetype));
-          RETVAL = newRV((SV*)result);
+          RETVAL = newRV_noinc((SV*)result);
         }
         else
         {
@@ -222,8 +222,8 @@ _tai_now()
 #else
         sprintf(b, "%llu",to.x);
 #endif
-        result = (SV*)sv_2mortal((SV*)newSVpv(b,0));
-        RETVAL = newRV((SV*)result);
+        result = newSVpv(b,0);
+        RETVAL = newRV_noinc(result);
     OUTPUT:
         RETVAL
 
