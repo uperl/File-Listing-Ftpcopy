@@ -19,5 +19,4 @@ pod_spelling_system:
     - unparseable
 
 pod_coverage:
-  private:
-    - File::Listing::Ftpcopy#constant
+  private: []

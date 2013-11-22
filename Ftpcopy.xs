@@ -172,7 +172,7 @@ _size_of_UV()
         RETVAL
 
 int
-constant(name)
+_constant(name)
         char *name
     CODE:
         if(!strcmp(name, "FORMAT_EPLF"))

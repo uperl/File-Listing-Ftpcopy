@@ -396,8 +396,8 @@ sub AUTOLOAD
   my $name;
   our $AUTOLOAD;
   ($name = $AUTOLOAD) =~ s/.*:://;
-  croak "$AUTOLOAD not defined" if $name eq 'constant';
-  my $val = constant($name);
+  croak "$AUTOLOAD not defined" if $name eq '_constant';
+  my $val = _constant($name);
   croak "$AUTOLOAD not defined" if $val == -1;
   do {
     no strict 'refs';
