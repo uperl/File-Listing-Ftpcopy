@@ -1,7 +1,6 @@
 use strict;
 use Config;
 use warnings;
-use v5.10.1;
 use autodie;
 use File::Spec;
 use File::Temp qw( tempdir );
@@ -24,10 +23,10 @@ foreach my $type (@types)
   $counter++;
   
   open my $out, '>', $src;
-  say $out "int main() {";
-  say $out "  $type t;";
-  say $out "  return sizeof(t);";
-  say $out "}";
+  print $out "int main() {\n";
+  print $out "  $type t;\n";
+  print $out "  return sizeof(t);\n";
+  print $out "}\n";
   close $out;
   
   run("$Config{cc} $Config{ccflags} -c -o $obj $src");
@@ -43,16 +42,16 @@ foreach my $type (@types)
   
   my $def_type = uc 'sizeof ' . $type;
   $def_type =~ s/ /_/g;
-  say $header "#define $def_type $size /* systype-info */";
-  say sprintf("%02d %s", $size, $type);
+  print $header "#define $def_type $size /* systype-info */\n";
+  print sprintf("%02d %s\n", $size, $type);
 }
 
-say $header "#define IS_64BIT_UV " . ($Config{uvsize} >= 8 ? 1 : 0);
+print $header "#define IS_64BIT_UV ", ($Config{uvsize} >= 8 ? 1 : 0), "\n";
 
 close $header;
 
 sub run
 {
-  #say "% @_";
+  #print "% @_\n";
   system @_;
 }
