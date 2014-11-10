@@ -2,7 +2,7 @@ package File::Listing::Ftpcopy;
 
 use strict;
 use warnings;
-use v5.10.1;
+use 5.010;
 use Exporter;
 use Carp qw( croak );
 use Time::Local qw( timelocal );
@@ -26,7 +26,7 @@ use Time::Local qw( timelocal );
  $dir = parse_dir(\*LISTING, '+0000');
 
  # ftpparse interface
- use v5.10;
+ use 5.010;
  use Parse::Listing::Ftpcopy qw( ftpparse SIZE_UNKNOWN );
  
  foreach my $line (`ls -l`)

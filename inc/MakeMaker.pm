@@ -2,7 +2,7 @@ package inc::MakeMaker;
 
 use Moose;
 use namespace::autoclean;
-use v5.10;
+use 5.010;
 
 with 'Dist::Zilla::Role::InstallTool';
 

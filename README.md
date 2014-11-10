@@ -18,7 +18,7 @@ parse directory listing using ftpparse from ftpcopy
     $dir = parse_dir(\*LISTING, '+0000');
 
     # ftpparse interface
-    use v5.10;
+    use 5.010;
     use Parse::Listing::Ftpcopy qw( ftpparse SIZE_UNKNOWN );
     
     foreach my $line (`ls -l`)

@@ -1,7 +1,7 @@
 use strict;
 use Config;
 use warnings;
-use v5.10.1;
+use 5.010;
 use autodie;
 use File::Spec;
 use File::Temp qw( tempdir );
