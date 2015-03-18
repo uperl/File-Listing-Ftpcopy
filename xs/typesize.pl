@@ -45,10 +45,8 @@ foreach my $type (@types)
   my $def_type = uc 'sizeof ' . $type;
   $def_type =~ s/ /_/g;
   print $header "#define $def_type $size /* systype-info */\n";
-  print sprintf("%02d %s\n", $size, $type);
+  #print sprintf("%02d %s\n", $size, $type);
 }
-
-print $header "#define IS_64BIT_UV " . ($Config{uvsize} >= 8 ? 1 : 0) . "\n";
 
 close $header;
 

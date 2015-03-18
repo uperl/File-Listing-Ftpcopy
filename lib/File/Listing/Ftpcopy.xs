@@ -4,8 +4,14 @@
 #include "XSUB.h"
 
 #include "ppport.h"
+#include <stdint.h>
+#define MATH_INT64_NATIVE_IF_AVAILABLE
+#include "perl_math_int64.h"
 
 MODULE = File::Listing::Ftpcopy		PACKAGE = File::Listing::Ftpcopy
+
+BOOT:
+    PERL_MATH_INT64_LOAD_OR_CROAK;
 
 SV *
 ftpparse(line)
@@ -14,9 +20,6 @@ ftpparse(line)
         HV * result;
         struct ftpparse fp;
         int val;
-#if ! IS_64BIT_UV
-        char b[21];
-#endif
     CODE:
         val = ftpparse(&fp, line, strlen(line), 0);
         if(val)
@@ -32,16 +35,7 @@ ftpparse(line)
            * use PRIu64 which is c99, otherwise try %llu
            * and cross fingers that it is supported.
            */
-#if IS_64BIT_UV
-          hv_store(result, "size",            4, newSVuv(fp.size), 0);
-#else
-#ifdef PRIu64
-          sprintf(b, "%"PRIu64,fp.size);
-#else
-          sprintf(b, "%llu",fp.size);
-#endif
-          hv_store(result, "size",            4, newSVpv(b,0), 0);
-#endif
+          hv_store(result, "size",            4, newSVu64(fp.size), 0);
           hv_store(result, "mtimetype",       9, newSViv(fp.mtimetype), 0);
           /*
            * okay this is slightly silly, the TAI implementation
@@ -53,16 +47,7 @@ ftpparse(line)
            * (at least in so far as it was converted to TAI in the
            * first place).
            */
-#if IS_64BIT_UV
-          hv_store(result, "mtime",           5, newSVuv(fp.mtime.x-4611686018427387914ULL), 0);
-#else
-#ifdef PRIu64
-          sprintf(b, "%"PRIu64,fp.mtime.x-4611686018427387914ULL);
-#else
-          sprintf(b, "%llu",fp.mtime.x-4611686018427387914ULL);
-#endif
-          hv_store(result, "mtime",           5, newSVpv(b,0), 0);
-#endif
+          hv_store(result, "mtime",           5, newSVu64(fp.mtime.x-4611686018427387914ULL), 0);
           hv_store(result, "idtype",          6, newSViv(fp.idtype), 0);
           hv_store(result, "id",              2, newSVpv(fp.id, fp.idlen), 0);
           hv_store(result, "format",          6, newSViv(fp.format), 0);
@@ -91,9 +76,6 @@ _parse_dir(line)
         char *type;
         SV * size;
         SV * mtime;
-#if ! IS_64BIT_UV
-        char b[21];
-#endif
     CODE:
         val = ftpparse(&fp, line, strlen(line), 0);
         if(val && !(fp.namelen == 1 && fp.name[0] == '.') && !(fp.namelen == 2 && fp.name[0] == '.' && fp.name[1] == '.'))
@@ -115,16 +97,7 @@ _parse_dir(line)
           }
           else
           {
-#if IS_64BIT_UV
-            size = newSVuv(fp.size);
-#else
-#ifdef PRIu64
-            sprintf(b, "%"PRIu64,fp.size);
-#else
-            sprintf(b, "%llu",fp.size);
-#endif
-            size = newSVpv(b,0);
-#endif
+            size = newSVu64(fp.size);
           }
           av_push(result, size);
           if(fp.mtimetype == FTPPARSE_MTIME_UNKNOWN)
@@ -133,16 +106,7 @@ _parse_dir(line)
           }
           else
           {
-#if IS_64BIT_UV
-            mtime = newSVuv(fp.mtime.x-4611686018427387914ULL);
-#else
-#ifdef PRIu64
-            sprintf(b, "%"PRIu64,fp.mtime.x-4611686018427387914ULL);
-#else
-            sprintf(b, "%llu",fp.mtime.x-4611686018427387914ULL);
-#endif
-            mtime = newSVpv(b,0);
-#endif
+            mtime = newSVu64(fp.mtime.x-4611686018427387914ULL);
           }
           av_push(result, mtime);
           av_push(result, newSV(0));
