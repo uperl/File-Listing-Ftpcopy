@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.06      2015-03-18 14:44:33 -0400
   - Migrated to Module::Build
   - Support Perl 5.8
   - Use Math::Int64 C API for 64 bit integers instead of
