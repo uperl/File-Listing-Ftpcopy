@@ -92,7 +92,12 @@ This module also provides a direct interface to the C<ftpparse> function as well
 
 =head1 FUNCTIONS
 
-=head2 parse_dir( $listing, [ $time_zone, [ $type, [ $error ] ] ] )
+=head2 parse_dir
+
+  my $dir = parse_dir( $listing );
+  my $dir = parse_dir( $listing, $time_zone );
+  my $dir = parse_dir( $listing, $time_zone, $type );
+  my $dir = parse_dir( $listing, $time_zone, $type, $error);
 
 The first argument ($listing) is the directory listing to parse.
 It can be a scalar, a reference to an array of directory lines or a
@@ -216,7 +221,9 @@ sub parse_dir ($;$$$)
   return wantarray ? @answer : \@answer;
 }
 
-=head2 ftpparse( $line )
+=head2 ftpparse
+
+ my $hash = ftpparse( $line );
 
 Parse a single line from an FTP listing.  Returns a hash ref of
 information about the file found in that line, or undef if no

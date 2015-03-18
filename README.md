@@ -63,7 +63,12 @@ This module also provides a direct interface to the `ftpparse` function as well.
 
 # FUNCTIONS
 
-## parse\_dir( $listing, \[ $time\_zone, \[ $type, \[ $error \] \] \] )
+## parse\_dir
+
+    my $dir = parse_dir( $listing );
+    my $dir = parse_dir( $listing, $time_zone );
+    my $dir = parse_dir( $listing, $time_zone, $type );
+    my $dir = parse_dir( $listing, $time_zone, $type, $error);
 
 The first argument ($listing) is the directory listing to parse.
 It can be a scalar, a reference to an array of directory lines or a
@@ -104,7 +109,9 @@ so this is always undef.
 Any field which could not be determined by the algorithm will be
 `undef`.
 
-## ftpparse( $line )
+## ftpparse
+
+    my $hash = ftpparse( $line );
 
 Parse a single line from an FTP listing.  Returns a hash ref of
 information about the file found in that line, or undef if no
