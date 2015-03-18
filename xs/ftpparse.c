@@ -102,7 +102,7 @@ guess_year(unsigned long month,unsigned long day)
 
 
 static int
-getmod (struct tai *t, const unsigned char *p, unsigned int l)
+getmod (struct tai *t, const char *p, unsigned int l)
 {
   unsigned int i;
   unsigned long year,mon,day,hour,min,sec;
@@ -380,7 +380,7 @@ parse_msdos(struct ftpparse *f, char *buf, unsigned int len)
 
 #define MAXWORDS 10
 static unsigned int 
-dosplit(char *buf, int len, char *p[], unsigned int l[])
+dosplit(char *buf, int len, char *p[], int l[])
 {
   unsigned int count=0;
   int inword=0;

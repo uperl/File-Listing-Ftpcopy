@@ -7,8 +7,8 @@
 int
 case_startb(const char *ulo, unsigned int l, const char *ush)
 {
-	const unsigned char *lo=ulo;
-	const unsigned char *sh=ush;
+	const unsigned char *lo= (const unsigned char*) ulo;
+	const unsigned char *sh= (const unsigned char*) ush;
 	unsigned int i;
 	if (!case_init_lwrdone) case_init_lwrtab();
 	i=0;
