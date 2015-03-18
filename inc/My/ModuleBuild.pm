@@ -3,6 +3,8 @@ package My::ModuleBuild;
 use strict;
 use warnings;
 use 5.008001;
+use File::Spec;
+use Config::AutoConf;
 use base qw( Module::Build );
 
 sub new
@@ -21,7 +23,18 @@ sub ACTION_build
 {
   my($self, @args) = @_;
   
-  system $^X, 'xs/typesize.pl';
+  my $ac = Config::AutoConf->new;
+  $ac->check_default_headers;
+  
+  $ac->check_sizeof_type($_) for 
+    ("short", "int", "long ", "unsigned short", "unsigned int",
+     "unsigned long", "long long", "unsigned long long");
+  
+  my $config_h = File::Spec->catfile('xs', 'auto-typesize.h');
+  
+  $self->add_to_cleanup($config_h);
+  $ac->write_config_h( $config_h );
+
   
   $self->SUPER::ACTION_build(@args);
 }
