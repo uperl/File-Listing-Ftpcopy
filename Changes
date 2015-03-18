@@ -5,6 +5,10 @@ Revision history for {{$dist->name}}
   - Support Perl 5.8
   - Use Math::Int64 C API for 64 bit integers instead of
     sometimes a UV and sometimes a string
+  - Use Config::AutoConf to detect type sizes instead of
+    our own home rolled detector
+  - As a consequence of the last point, Microsoft Visual
+    C++ is now supported
 
 0.05      2013-11-22 10:07:28 -0500
   - added diagnostic
