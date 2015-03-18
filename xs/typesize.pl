@@ -6,6 +6,8 @@ use autodie;
 use File::Spec;
 use File::Temp qw( tempdir );
 
+chdir 'xs';
+
 my $dir = tempdir( CLEANUP => 1 );
 
 my @types = ("short", "int", "long ", "unsigned short", "unsigned int", 
