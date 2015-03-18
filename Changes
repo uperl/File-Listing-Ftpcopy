@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Migrated to Module::Build
+  - Support Perl 5.8
 
 0.05      2013-11-22 10:07:28 -0500
   - added diagnostic

@@ -2,7 +2,7 @@ package File::Listing::Ftpcopy;
 
 use strict;
 use warnings;
-use 5.010;
+use 5.008001;
 use Exporter;
 use Carp qw( croak );
 use Time::Local qw( timelocal );
@@ -139,7 +139,7 @@ sub parse_dir ($;$$$)
 {
   my($listing, $time_zone, $type, $error) = @_;
   
-  $error = sub { warn shift } if ($error//'') eq 'warn';
+  $error = sub { warn shift } if (defined $error ? $error : '') eq 'warn';
 
   my $next;
   if(ref($listing) eq 'ARRAY')
