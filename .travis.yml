@@ -1,6 +1,7 @@
 language: perl
 install:
-  - cpanm -n Dist::Zilla::PluginBundle::Author::Plicease
+  - cpanm -n Dist::Zilla Config::AutoConf Math::Int64 Devel::PPPort
+  - dzil authordeps --missing | cpanm -n
 script: HARNESS_IS_VERBOSE=1 dzil run prove -lvr t xt
 perl:
   - "5.21"
