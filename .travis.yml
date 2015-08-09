@@ -1,4 +1,5 @@
 language: perl
+sudo: false
 install:
   - cpanm -n Dist::Zilla Config::AutoConf Math::Int64 Devel::PPPort
   - dzil authordeps --missing | cpanm -n
