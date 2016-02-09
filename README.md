@@ -232,7 +232,7 @@ am licensing this whole distribution under GPL 2.
 
 C code: Uwe Ohse
 
-XS and Perl code: Graham Ollis <plicease@cpan.org>
+XS and Perl code: Graham Ollis &lt;plicease@cpan.org>
 
 # COPYRIGHT AND LICENSE
 

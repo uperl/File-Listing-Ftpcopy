@@ -1,14 +1,20 @@
 language: perl
 sudo: false
+
 install:
-  - cpanm -n Dist::Zilla Config::AutoConf Math::Int64 Devel::PPPort
+  - perlbrew list
   - dzil authordeps --missing | cpanm -n
-script: HARNESS_IS_VERBOSE=1 dzil run prove -lvr t xt
+  - dzil listdeps --missing | cpanm -n
+
 perl:
-  - "5.21"
+  - "5.22"
   - "5.20"
   - "5.18"
   - "5.16"
   - "5.14"
   - "5.12"
   - "5.10"
+  - "5.8"
+
+script:
+ - dzil test -v
