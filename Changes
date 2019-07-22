@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fix install to work on systems with noexec on /tmp (gh#4)
 
 0.08      2017-07-31 19:43:45 -0400
   - Remove dependency on Config::AutoConf
