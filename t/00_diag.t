@@ -14,6 +14,7 @@ $modules{$_} = $_ for qw(
   Module::Build
   POSIX
   Test2::V0
+  autodie
 );
 
 
