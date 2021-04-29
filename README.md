@@ -1,34 +1,36 @@
-# File::Listing::Ftpcopy [![Build Status](https://secure.travis-ci.org/plicease/File-Listing-Ftpcopy.png)](http://travis-ci.org/plicease/File-Listing-Ftpcopy)
+# File::Listing::Ftpcopy ![linux](https://github.com/uperl/File-Listing-Ftpcopy/workflows/linux/badge.svg) ![macos](https://github.com/uperl/File-Listing-Ftpcopy/workflows/macos/badge.svg) ![windows](https://github.com/uperl/File-Listing-Ftpcopy/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/File-Listing-Ftpcopy/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/File-Listing-Ftpcopy/workflows/msys2-mingw/badge.svg)
 
 parse directory listing using ftpparse from ftpcopy
 
 # SYNOPSIS
 
-    # traditional interface
-    use File::Listing::Ftpcopy qw(parse_dir);
-    $ENV{LANG} = "C";  # dates in non-English locales not supported
-    for (parse_dir(`ls -l`)) {
-        ($name, $type, $size, $mtime, $mode) = @$_;
-        next if $type ne 'f'; # plain file
-        #...
-    }
+```perl
+# traditional interface
+use File::Listing::Ftpcopy qw(parse_dir);
+$ENV{LANG} = "C";  # dates in non-English locales not supported
+for (parse_dir(`ls -l`)) {
+    ($name, $type, $size, $mtime, $mode) = @$_;
+    next if $type ne 'f'; # plain file
+    #...
+}
 
-    # directory listing can also be read from a file
-    open(LISTING, "zcat ls-lR.gz|");
-    $dir = parse_dir(\*LISTING, '+0000');
+# directory listing can also be read from a file
+open(LISTING, "zcat ls-lR.gz|");
+$dir = parse_dir(\*LISTING, '+0000');
 
-    # ftpparse interface
-    use 5.010;
-    use Parse::Listing::Ftpcopy qw( ftpparse SIZE_UNKNOWN );
-    
-    foreach my $line (`ls -l`)
-    {
-      chomp $line;
-      my $h = ftpparse($line);
-      next unless defined $h;
-      say "name : ", $h->{name}
-      say "size : ", $h->{size} if $h->{sizetype} != SIZE_UNKNOWN;
-    }
+# ftpparse interface
+use 5.010;
+use Parse::Listing::Ftpcopy qw( ftpparse SIZE_UNKNOWN );
+
+foreach my $line (`ls -l`)
+{
+  chomp $line;
+  my $h = ftpparse($line);
+  next unless defined $h;
+  say "name : ", $h->{name}
+  say "size : ", $h->{size} if $h->{sizetype} != SIZE_UNKNOWN;
+}
+```
 
 # DESCRIPTION
 
@@ -65,10 +67,12 @@ This module also provides a direct interface to the `ftpparse` function as well.
 
 ## parse\_dir
 
-    my $dir = parse_dir( $listing );
-    my $dir = parse_dir( $listing, $time_zone );
-    my $dir = parse_dir( $listing, $time_zone, $type );
-    my $dir = parse_dir( $listing, $time_zone, $type, $error);
+```perl
+my $dir = parse_dir( $listing );
+my $dir = parse_dir( $listing, $time_zone );
+my $dir = parse_dir( $listing, $time_zone, $type );
+my $dir = parse_dir( $listing, $time_zone, $type, $error);
+```
 
 The first argument ($listing) is the directory listing to parse.
 It can be a scalar, a reference to an array of directory lines or a
@@ -90,11 +94,13 @@ default is 'ignore'.
 
 For each file found in the listing it returns an array ref
 
-    foreach my $fileinfo (parse_dir($listing))
-    {
-      ($name, $type, $size, $mtime, $mode) = @$fileinfo;
-      # ...
-    }
+```perl
+foreach my $fileinfo (parse_dir($listing))
+{
+  ($name, $type, $size, $mtime, $mode) = @$fileinfo;
+  # ...
+}
+```
 
 The first element ($name) is the name of the file.
 
@@ -111,7 +117,9 @@ Any field which could not be determined by the algorithm will be
 
 ## ftpparse
 
-    my $hash = ftpparse( $line );
+```perl
+my $hash = ftpparse( $line );
+```
 
 Parse a single line from an FTP listing.  Returns a hash ref of
 information about the file found in that line, or undef if no

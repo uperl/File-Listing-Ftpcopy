@@ -2,7 +2,7 @@ package File::Listing::Ftpcopy;
 
 use strict;
 use warnings;
-use 5.008001;
+use 5.010;
 use Exporter;
 use Carp qw( croak );
 use Time::Local qw( timelocal );
