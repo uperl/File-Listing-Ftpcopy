@@ -68,20 +68,20 @@ jobs:
           cd $( cygpath -u $GITHUB_WORKSPACE )
           yes | cpan App::cpanminus || true
           cpanm -n Dist::Zilla
-          perl -S dzil authordeps --missing | perl -S cpanm -n
-          perl -S dzil listdeps --missing   | perl -S cpanm -n
+          perl -S dzil -I. authordeps --missing | perl -S cpanm -n
+          perl -S dzil -I. listdeps --missing   | perl -S cpanm -n
 
       - name: Install Dynamic Dependencies
         run: |
           export PATH="/cygdrive/c/cx/bin:$PATH"
           cd $( cygpath -u $GITHUB_WORKSPACE )
-          perl -S dzil run --no-build 'perl -S cpanm --installdeps .'
+          perl -S dzil -I. run --no-build 'perl -S cpanm --installdeps .'
 
       - name: Run Tests
         run: |
           export PATH="/cygdrive/c/cx/bin:$PATH"
           cd $( cygpath -u $GITHUB_WORKSPACE )
-          perl -S dzil test -v
+          perl -S dzil -I. test -v
 
       - name: CPAN log
         if: ${{ failure() }}
