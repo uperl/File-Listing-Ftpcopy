@@ -1,4 +1,4 @@
-# File::Listing::Ftpcopy ![static](https://github.com/uperl/File-Listing-Ftpcopy/workflows/static/badge.svg) ![linux](https://github.com/uperl/File-Listing-Ftpcopy/workflows/linux/badge.svg) ![macos](https://github.com/uperl/File-Listing-Ftpcopy/workflows/macos/badge.svg) ![windows](https://github.com/uperl/File-Listing-Ftpcopy/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/File-Listing-Ftpcopy/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/File-Listing-Ftpcopy/workflows/msys2-mingw/badge.svg)
+# File::Listing::Ftpcopy ![static](https://github.com/uperl/File-Listing-Ftpcopy/workflows/static/badge.svg) ![linux](https://github.com/uperl/File-Listing-Ftpcopy/workflows/linux/badge.svg) ![macos](https://github.com/uperl/File-Listing-Ftpcopy/workflows/macos/badge.svg) ![windows](https://github.com/uperl/File-Listing-Ftpcopy/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/uperl/File-Listing-Ftpcopy/workflows/msys2-mingw/badge.svg)
 
 parse directory listing using ftpparse from ftpcopy
 
