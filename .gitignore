@@ -1,3 +1,5 @@
 /File-Listing-Ftpcopy-*
 /.build
 /.tmp
+*.old
+*.orig
